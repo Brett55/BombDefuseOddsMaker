@@ -1,3 +1,8 @@
-settings.py
-.idea
 *.pyc
+staticfiles
+.idea
+local_settings.py
+node_modules
+admin.json
+npm-debug.log
+settings.py
