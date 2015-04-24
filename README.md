@@ -63,7 +63,7 @@ Example:
 `http://192.168.59.103:8000/6/'
 
 Request object params:
-	`{ user_input: <nthPosition> }
+	`{ user_input: <nthPosition> }`
 
 returns
 
