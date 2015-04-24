@@ -8,7 +8,7 @@ On MAC OSX
 ----------
 Requirements: Docker and Docker-Compose
 
-You can setup on both here:<a href="https://docs.docker.com/compose/install/"></a>
+You can setup on both here: `https://docs.docker.com/compose/install/`
 
 Step 1
 
@@ -33,4 +33,20 @@ Step 5
 Step 6
 
 Now go to `<your container's ip>:8000` in your browser
+
+RESTful API
+----------
+
+Main Syntax for API:
+
+`<your container's ip>:8000/<nThPosition>/<SeedValue1>/<SeedValue2>/`
+
+Example:
+
+`http://192.168.59.103:8000/6/1/1/'
+
+returns
+
+`Result: 8 Finished in 0.0001`
+
 
