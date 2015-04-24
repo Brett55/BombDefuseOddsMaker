@@ -32,6 +32,9 @@ Step 5
 
 Step 6
 
+	$ docker-compose run web python manage.py migrate
+	
+
 Now go to `<your container's ip>:8000` in your browser
 
 Example:
