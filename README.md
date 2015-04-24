@@ -43,11 +43,27 @@ RESTful API
 
 `GET` Syntax for API:
 
-`<your container's ip>:8000/<nThPosition>/<SeedValue1>/<SeedValue2>/`
+`<your container's ip>:8000/v1/calculate/<nThPosition>/<SeedValue1>/<SeedValue2>/`
 
 Example:
 
 `http://192.168.59.103:8000/6/1/1/'
+
+returns
+
+`Result: 8 Finished in 0.0001`
+
+
+`POST` Syntax for API:
+
+`<your container's ip>:8000/v1/calculate_and_save/`
+
+Example:
+
+`http://192.168.59.103:8000/6/'
+
+Request object params:
+	`{ user_input: <nthPosition> }
 
 returns
 
