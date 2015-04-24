@@ -34,10 +34,14 @@ Step 6
 
 Now go to `<your container's ip>:8000` in your browser
 
+Example:
+
+`http://192.168.59.103:8000/'
+
 RESTful API
 ----------
 
-Main Syntax for API:
+`GET` Syntax for API:
 
 `<your container's ip>:8000/<nThPosition>/<SeedValue1>/<SeedValue2>/`
 
