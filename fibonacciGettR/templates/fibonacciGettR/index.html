@@ -3,6 +3,8 @@
 
 <head>
     {% load staticfiles %}
+    {# Load the tag library #}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,22 +118,57 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <form name="myForm" id="fibForm">
+                    {% csrf_token %}
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Type your input here" id="inputFib">
+                            <label>Integer</label>
+                            <input type="text" class="form-control" placeholder="Fibonacci Input" id="inputFib">
 
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Integer</label>
+                            <input type="text" class="form-control" placeholder="Seed Value 1" id="inputFibSeed1">
+
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Integer</label>
+                            <input type="text" class="form-control" placeholder="Seed Value 2" id="inputFibSeed2">
+
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <h2 id="success"></h2>
                     <br>
-                    <div id="success"></div>
                     <div class="row">
                         <div class="form-group col-xs-12">
                             <button type="submit" class="btn btn-success btn-lg">Submit</button>
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="success" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Previous Submissions</h2>
+                <hr class="star-light">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                {% for fib in args.fib_submissions %}
+                    <p>fib</p>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -158,10 +195,10 @@
 <script src={% static "fibonacciGettR/web/js/bootstrap.min.js" %}></script>
 
 <!-- Plugin JavaScript -->
-{#<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>#}
-{##}
-{#<script src={% static "fibonacciGettR/web/js/classie.js" %}></script>#}
-{#<script src={% static "fibonacciGettR/web/js/cbpAnimatedHeader.js" %}></script>#}
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+<script src={% static "fibonacciGettR/web/js/classie.js" %}></script>
+<script src={% static "fibonacciGettR/web/js/cbpAnimatedHeader.js" %}></script>
 
 
 <!-- Contact Form JavaScript -->
@@ -169,22 +206,24 @@
 {#<script src={% static "fibonacciGettR/web/js/contact_me.js" %}></script>#}
 
 <!-- Custom Theme JavaScript -->
-{#<script src={% static "fibonacciGettR/web/js/freelancer.js" %}></script>#}
+<script src={% static "fibonacciGettR/web/js/freelancer.js" %}></script>
 
 <script>
     var frm = $('#fibForm');
     frm.submit(function () {
         $.ajax({
-            type: "GET",
-            url: "v1/calculate/" + $('#inputFib').val(),
+            type: "POST",
+            url: "v1/calculate/" + $('#inputFib').val() + "/" + $('#inputFibSeed1').val() +
+            "/" + $('#inputFibSeed2').val() + "/",
             success: function (data) {
                 //Remove the values from the input
                 console.log(data);
+                $('#success').text("Result: " + data);
             },
 
             error: function (xhr, errmsg, err) {
                 console.log("ERROR!");
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
+                $('#success').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
                 " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
                 console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
