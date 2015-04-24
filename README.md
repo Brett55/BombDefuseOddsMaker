@@ -1,5 +1,5 @@
 Fibonacci GettR
-=============
+===============
 
 A simple web app that calculates the nth position in the Fibonacci sequence!
 
@@ -41,7 +41,7 @@ Example:
 RESTful API
 ----------
 
-`GET` Syntax for API:
+###'GET' Syntax for API:
 
 `<your container's ip>:8000/v1/calculate/<nThPosition>/<SeedValue1>/<SeedValue2>/`
 
@@ -54,7 +54,7 @@ returns
 `Result: 8 Finished in 0.0001`
 
 
-`POST` Syntax for API:
+###'POST' Syntax for API:
 
 `<your container's ip>:8000/v1/calculate_and_save/`
 
