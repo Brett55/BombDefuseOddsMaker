@@ -1,7 +1,8 @@
 import models
 import forms
+import time
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.utils.html import escape
 
 
@@ -18,30 +19,56 @@ def fib(n, seed_val_1, seed_val_2):
 
 def main(request):
     '''main landing page with previous submissions'''
-    args = {}
-    args.update(csrf(request))
-    args['fib_submissions'] = models.Fibonacci.objects.all()
-    return render_to_response('fibonacciGettR/index.html', args)
+
+    return render_to_response('fibonacciGettR/index.html')
 
 
-def calculate(request, n, seed_val_1, seed_val_2):
+def calculate(request, n, seed_val_1=1, seed_val_2=1):
+    '''calculate API, send input to fib function and render result to client'''
+
+    if request.method == 'GET':
+        if check_input(n):
+            start_time = time.time()
+            result = list(fib(escape(n), escape(seed_val_1), escape(seed_val_2)))[-1]
+            end_time = round(time.time() - start_time, 4)
+            return HttpResponse("Result: " + str(result) + " Finished in " + str(end_time))
+        else:
+            return HttpResponse("Input too large!")
+
+    else:
+        HttpResponseBadRequest('<h1>Page not found</h1>')
+
+
+def calculate_and_save(request):
     '''calculate API, send input to fib function and render result to client'''
 
     if request.method == 'POST':
-        result = list(fib(escape(n), escape(seed_val_1), escape(seed_val_2)))[-1]
         form_main = forms.Fibonacci(request.POST)
         if form_main.valid():
             cleaned_data = form_main.cleaned_data
             new_fibonacci = models.Fibonacci()
-            new_fibonacci.user_input = cleaned_data['user_input']
-            new_fibonacci.result = cleaned_data['result']
-            new_fibonacci.save()
-            return HttpResponse(result)
+            if check_input(cleaned_data['user_input']):
+                new_fibonacci.user_input = cleaned_data['user_input']
+                start_time = time.time()
+
+                # check value is within range and process
+                result = list(fib(int(escape(cleaned_data['user_input']))))[-1]
+
+                end_time = round(time.time() - start_time, 4)
+                new_fibonacci.result = result
+                new_fibonacci.save()
+                return HttpResponse("Result: " + str(result) + " Finished in " + str(end_time))
+            else:
+                return HttpResponse("Input too large!")
         else:
             return HttpResponse(form_main.errors)
 
     else:
-        HttpResponse("Error: Wrong REST Endpoint")
+        HttpResponseBadRequest('<h1>Page not found</h1>')
+
+
+def check_input(n):
+    return int(n) < 9999
 
 
 

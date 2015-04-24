@@ -118,7 +118,6 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <form name="myForm" id="fibForm">
-                    {% csrf_token %}
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Integer</label>
@@ -166,9 +165,6 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                {% for fib in args.fib_submissions %}
-                    <p>fib</p>
-                {% endfor %}
             </div>
         </div>
     </div>
@@ -212,13 +208,13 @@
     var frm = $('#fibForm');
     frm.submit(function () {
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "v1/calculate/" + $('#inputFib').val() + "/" + $('#inputFibSeed1').val() +
             "/" + $('#inputFibSeed2').val() + "/",
             success: function (data) {
                 //Remove the values from the input
                 console.log(data);
-                $('#success').text("Result: " + data);
+                $('#success').text(data);
             },
 
             error: function (xhr, errmsg, err) {
