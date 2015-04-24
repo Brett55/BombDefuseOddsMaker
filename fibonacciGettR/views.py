@@ -4,9 +4,11 @@ import time
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.utils.html import escape
+from django.views.decorators.csrf import csrf_exempt
 
 
-def fib(n, seed_val_1, seed_val_2):
+
+def fib(n, seed_val_1=1, seed_val_2=1):
     '''return index of nth position in fibonacci sequence'''
 
     seed_val_1 = int(seed_val_1)
@@ -23,7 +25,7 @@ def main(request):
     return render_to_response('fibonacciGettR/index.html')
 
 
-def calculate(request, n, seed_val_1=1, seed_val_2=1):
+def calculate(request, n, seed_val_1, seed_val_2):
     '''calculate API, send input to fib function and render result to client'''
 
     if request.method == 'GET':
@@ -39,12 +41,13 @@ def calculate(request, n, seed_val_1=1, seed_val_2=1):
         HttpResponseBadRequest('<h1>Page not found</h1>')
 
 
+@csrf_exempt
 def calculate_and_save(request):
     '''calculate API, send input to fib function and render result to client'''
 
     if request.method == 'POST':
         form_main = forms.Fibonacci(request.POST)
-        if form_main.valid():
+        if form_main.is_valid():
             cleaned_data = form_main.cleaned_data
             new_fibonacci = models.Fibonacci()
             if check_input(cleaned_data['user_input']):

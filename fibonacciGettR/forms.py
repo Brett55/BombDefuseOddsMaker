@@ -5,4 +5,4 @@ import models
 class Fibonacci(ModelForm):
     class Meta:
         model = models.Fibonacci
-        fields = ('user_input', 'result')
+        fields = ('user_input',)

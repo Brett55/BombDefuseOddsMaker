@@ -144,6 +144,7 @@
                     </div>
                     <h2 id="success"></h2>
                     <br>
+
                     <div class="row">
                         <div class="form-group col-xs-12">
                             <button type="submit" class="btn btn-success btn-lg">Submit</button>
@@ -155,20 +156,6 @@
     </div>
 </section>
 
-<section class="success" id="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Previous Submissions</h2>
-                <hr class="star-light">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Footer -->
 <footer class="text-center">
@@ -213,8 +200,23 @@
             "/" + $('#inputFibSeed2').val() + "/",
             success: function (data) {
                 //Remove the values from the input
-                console.log(data);
                 $('#success').text(data);
+            },
+
+            error: function (xhr, errmsg, err) {
+                console.log("ERROR!");
+                $('#success').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "v1/calculate_and_save/",
+            data:{ user_input: $('#inputFib').val() },
+            success: function (data) {
+                //Remove the values from the input
+                console.log(data);
             },
 
             error: function (xhr, errmsg, err) {
