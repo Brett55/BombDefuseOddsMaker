@@ -26,8 +26,9 @@ Step 4
 
 	$ boot2docker ip
 	
-
+	
 Step 5
+
 	$ docker-compose run web python manage.py migrate
 	
 
