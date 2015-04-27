@@ -33,6 +33,10 @@ Step 6
 
 	$ docker-compose up
 	
+Step 6
+
+	Ctrl-C & re-run $ docker-compose up
+	
 
 Now go to `<your container's ip>:8000` in your Browser
 
