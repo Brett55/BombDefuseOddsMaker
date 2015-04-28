@@ -34,8 +34,10 @@ Step 5
 Step 6
 
 	Ctrl-C & $ docker-compose run web python manage.py migratere-run 
+
 	
 Step 7
+
 	$ docker-compose up
 	
 
