@@ -29,16 +29,14 @@ Step 4
 	
 Step 5
 
-	$ docker-compose run web python manage.py migrate
-	
-
-Step 6
-
 	$ docker-compose up
 	
-Step 7
+Step 6
 
-	Ctrl-C & re-run $ docker-compose up
+	Ctrl-C & $ docker-compose run web python manage.py migratere-run 
+	
+Step 7
+	$ docker-compose up
 	
 
 Now go to `<your container's ip>:8000` in your Browser
