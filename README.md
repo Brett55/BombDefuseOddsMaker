@@ -11,8 +11,8 @@ Requirements: Docker and Docker-Compose
 You can get setup on both here: `https://docs.docker.com/compose/install/`
 
 
-$  boot2docker version
-$  docker -v
+`boot2docker version`
+`docker -v`
 
 Should both work before proceeding:
 
