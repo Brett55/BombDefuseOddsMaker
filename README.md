@@ -10,6 +10,13 @@ Requirements: Docker and Docker-Compose
 
 You can get setup on both here: `https://docs.docker.com/compose/install/`
 
+
+$  boot2docker version
+$  docker -v
+
+Should both work before proceeding:
+
+
 Step 1
 
     $ git clone https://github.com/Brett55/FibonacciGettR
