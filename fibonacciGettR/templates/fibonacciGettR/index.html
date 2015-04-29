@@ -142,7 +142,11 @@
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
-                    <h2 id="success"></h2>
+                    <h2 id="success">
+                        <br>                    
+                        {% for x in results %}
+                            <p>User Entered {{ x.user_input }} and returned {{ x.result }}</p>
+                        {% endfor %}</h2>
                     <br>
 
                     <div class="row">

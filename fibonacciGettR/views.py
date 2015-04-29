@@ -22,7 +22,8 @@ def fib(n, seed_val_1=1, seed_val_2=1):
 def main(request):
     '''main landing page with previous submissions'''
 
-    return render_to_response('fibonacciGettR/index.html')
+    results = models.Fibonacci.objects.all()
+    return render_to_response('fibonacciGettR/index.html', {"results":results})
 
 
 def calculate(request, n, seed_val_1, seed_val_2):
@@ -71,7 +72,7 @@ def calculate_and_save(request):
 
 
 def check_input(n):
-    return int(n) < 9999
+    return int(n) < 50
 
 
 
