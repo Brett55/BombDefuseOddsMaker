@@ -8,7 +8,15 @@ On MAC OSX
 ----------
 Requirements: Docker and Docker-Compose
 
-You can setup on both here: `https://docs.docker.com/compose/install/`
+You can get setup on both here: `https://docs.docker.com/compose/install/`
+
+
+`$ boot2docker version`
+
+`$ docker -v`
+
+Should both work before proceeding:
+
 
 Step 1
 
@@ -24,18 +32,24 @@ Step 3
 
 Step 4
 
-	$ boot2docker ip //write this down
-
+	$ boot2docker ip
+	
+	
 Step 5
 
 	$ docker-compose up
-
+	
 Step 6
 
-	$ docker-compose run web python manage.py migrate
+	Ctrl-C & $ docker-compose run web python manage.py migrate 
+
+	
+Step 7
+
+	$ docker-compose up
 	
 
-Now go to `<your container's ip>:8000` in your browser
+Now go to `<your container's ip>:8000` in your Browser
 
 Example:
 
@@ -52,7 +66,7 @@ Example:
 
 `http://192.168.59.103:8000/6/1/1/'
 
-returns
+Returns
 
 `Result: 8 Finished in 0.0001`
 
@@ -68,7 +82,7 @@ Example:
 Request object params:
 	`{ user_input: <nthPosition> }`
 
-returns
+Returns
 
 `Result: 8 Finished in 0.0001`
 
