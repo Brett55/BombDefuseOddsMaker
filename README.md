@@ -32,21 +32,13 @@ Step 3
 
 Step 4
 
-	$ boot2docker ip
+	$ boot2docker ip //write this down
 	
 	
 Step 5
 
 	$ docker-compose up
-	
-Step 6
 
-	Ctrl-C & $ docker-compose run web python manage.py migrate 
-
-	
-Step 7
-
-	$ docker-compose up
 	
 
 Now go to `<your container's ip>:8000` in your Browser
