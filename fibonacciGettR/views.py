@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.utils.html import escape
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_list_or_404
 
 
 
@@ -21,8 +22,12 @@ def fib(n, seed_val_1=1, seed_val_2=1):
 
 def main(request):
     '''main landing page with previous submissions'''
+    try:
+        results = models.Fibonacci.objects.all()
+    except models.Fibonacci.DoesNotExist:
+        print "Model does not exist"
+        results = None
 
-    results = models.Fibonacci.objects.all()
     return render_to_response('fibonacciGettR/index.html', {"results":results})
 
 
